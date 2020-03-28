@@ -2,7 +2,7 @@ node {
     def app
     stage('Build Docker Image') {
         checkout scm
-        app = docker.build('dockerhp/sample-app:latest')
+        app = docker.build('mrnim94/sample-app:latest')
     }
     
     stage('Publish to Docker Hub') {
@@ -13,7 +13,7 @@ node {
 
     stage('Deploy to Production') {
         docker.withServer('tcp://production:2376', 'production') {
-            sh 'docker run -d dockerhp/sample-app'
+            sh 'docker run -d mrnim94/sample-app'
         }
     }
 }
