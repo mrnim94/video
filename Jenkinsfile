@@ -13,7 +13,7 @@ node {
 
     stage('Deploy to Production') {
         docker.withServer('tcp://192.168.21.21:2375', 'production') {
-            sh 'docker run -d --name sample mrnim94/sample-app'
+            sh 'docker service create --replicas 2 -p 80:3000 --name sample mrnim94/sample-app'
         }
     }
 }
